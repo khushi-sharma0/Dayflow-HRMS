@@ -8,7 +8,6 @@ import {
   Send,
   AlertCircle,
   Paperclip,
-  CheckCircle2,
 } from 'lucide-react';
 import { TimeOffType } from '../types';
 import { StorageService } from '../services/storage';
@@ -41,7 +40,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
 
   if (!isOpen || !currentUser) return null;
 
-  // Calculate days excluding weekends
   const calculateDays = (start: string, end: string): number => {
     if (!start || !end) return 1;
     const d1 = new Date(start);
@@ -115,7 +113,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
           transition={{ duration: 0.2 }}
           className="relative w-full max-w-lg bg-[#12141c] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden my-8"
         >
-          {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-gray-800/80 bg-[#171a26]/50">
             <div className="flex items-center gap-3">
               <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400">
@@ -136,7 +133,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
             </button>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {error && (
               <div className="p-3 rounded-xl bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs flex items-center gap-2">
@@ -145,7 +141,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               </div>
             )}
 
-            {/* Leave Type Select */}
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1.5">Leave Type</label>
               <div className="grid grid-cols-3 gap-2">
@@ -176,7 +171,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               </div>
             </div>
 
-            {/* Dates */}
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-medium text-gray-300 mb-1.5 flex items-center gap-1">
@@ -211,7 +205,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               </div>
             </div>
 
-            {/* Calculated Days Preview */}
             <div className="p-3 rounded-xl bg-[#0b0c10] border border-gray-800/80 flex items-center justify-between">
               <span className="text-xs text-gray-400 flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-purple-400" />
@@ -222,7 +215,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               </span>
             </div>
 
-            {/* Reason */}
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1.5 flex items-center gap-1">
                 <FileText className="w-3.5 h-3.5 text-purple-400" /> Reason / Notes
@@ -237,7 +229,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               />
             </div>
 
-            {/* Optional Attachment */}
             <div>
               <label className="block text-xs font-medium text-gray-300 mb-1.5 flex items-center gap-1">
                 <Paperclip className="w-3.5 h-3.5 text-purple-400" /> Supporting Document / Doctor's Note (Optional)
@@ -260,7 +251,6 @@ export const ApplyLeaveModal: React.FC<ApplyLeaveModalProps> = ({
               </label>
             </div>
 
-            {/* Actions */}
             <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-800">
               <button
                 type="button"
