@@ -57,12 +57,7 @@ export const AuthPage: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-2xl font-bold text-gray-100 tracking-tight leading-snug">
-              Secure Corporate Access for Staff & HR Leadership
-            </h2>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Dayflow coordinates real-time attendance, LOI-standardized employee credentials, leave management workflows, and attendance-linked payable day payroll.
-            </p>
+            
           </div>
 
           {/* Strict Account Issuance Policy Card */}
