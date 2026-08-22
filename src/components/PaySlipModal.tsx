@@ -1,11 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import {
-  X,
-  Printer,
-  ShieldCheck,
-  CheckCircle2,
-} from 'lucide-react';
+import { X, Printer, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { Employee, SalaryBreakdown } from '../types';
 import { formatINR, formatIndianDate } from '../utils/formatters';
 
@@ -40,7 +35,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
           transition={{ duration: 0.2 }}
           className="relative w-full max-w-3xl bg-[#12141c] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden my-8"
         >
-          {/* Top action bar */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-[#171a26]/70">
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold px-2.5 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">
@@ -65,9 +59,7 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
             </div>
           </div>
 
-          {/* Printable Payslip Body */}
           <div className="p-8 space-y-6 bg-[#0f1118] text-gray-200" id="printable-payslip">
-            {/* Payslip Header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-800">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center font-black text-white text-xl tracking-wider shadow-lg shadow-purple-600/30">
@@ -87,7 +79,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Employee Meta Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-[#141724] border border-gray-800/80 text-xs">
               <div>
                 <span className="text-gray-400 block mb-0.5">Employee Name</span>
@@ -123,7 +114,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Statutory & Banking Information (India) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-[#10131e] border border-gray-800 text-xs">
               <div>
                 <span className="text-gray-400 block mb-0.5">PAN Number</span>
@@ -149,7 +139,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Attendance & Payable Days Influence Bar */}
             <div className="p-4 rounded-xl bg-purple-950/20 border border-purple-800/40 space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="font-semibold text-purple-300 flex items-center gap-1.5">
@@ -184,9 +173,7 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Earnings & Deductions Tables */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Earnings Table */}
               <div className="rounded-xl border border-gray-800 overflow-hidden bg-[#121522]">
                 <div className="px-4 py-2.5 bg-[#181c2d] border-b border-gray-800 flex items-center justify-between text-xs font-semibold text-white">
                   <span>Earnings & Allowances</span>
@@ -220,7 +207,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
                 </div>
               </div>
 
-              {/* Deductions Table */}
               <div className="rounded-xl border border-gray-800 overflow-hidden bg-[#121522]">
                 <div className="px-4 py-2.5 bg-[#181c2d] border-b border-gray-800 flex items-center justify-between text-xs font-semibold text-white">
                   <span>Statutory Deductions & Taxes</span>
@@ -250,7 +236,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Net Pay Highlight Banner */}
             <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-900/40 via-indigo-900/40 to-blue-900/30 border border-purple-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <span className="text-xs text-purple-300 font-medium">Net Take-Home Pay (Direct Bank Credit)</span>
@@ -264,7 +249,6 @@ export const PaySlipModal: React.FC<PaySlipModalProps> = ({
               </div>
             </div>
 
-            {/* Footer note */}
             <div className="text-center text-[11px] text-gray-500 pt-2 border-t border-gray-800/80">
               This is a system-generated pay slip from Dayflow Human Resource Management System (India). No physical signature is required.
             </div>
