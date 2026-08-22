@@ -1,4 +1,6 @@
 # DayFlow
+![Logo](Logo.png)
+
 
 ## Project Overview
 DayFlow is a Human Resource Management System designed to simplify and streamline core HR processes. It provides tools for managing employee records, tracking attendance, and processing time-off requests within a clean and intuitive interface. 
