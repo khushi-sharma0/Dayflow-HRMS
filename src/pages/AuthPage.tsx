@@ -31,23 +31,24 @@ export const AuthPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07080c] flex items-center justify-center p-4 sm:p-6 lg:p-8 font-['Plus_Jakarta_Sans',sans-serif] relative">
-      <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+      {/* Top Corner Day/Night Theme Toggle */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
         <ThemeToggle showLabel />
       </div>
 
-      <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Left Side: Brand & Policy Notice */}
         <div className="lg:col-span-6 space-y-6">
           <div className="flex items-center gap-3">
             <img
               src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
               alt="Dayflow Logo"
-              className="w-12 h-12 object-contain"
+              className="w-10 h-10 object-contain"
             />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-black text-white tracking-tight">Dayflow</h1>
-                <span className="text-xs px-2 py-0.5 rounded font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-mono font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">
                   HRMS
                 </span>
               </div>
@@ -56,7 +57,7 @@ export const AuthPage: React.FC = () => {
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-100 tracking-tight leading-snug">
+            <h2 className="text-2xl font-bold text-gray-100 tracking-tight leading-snug">
               Secure Corporate Access for Staff & HR Leadership
             </h2>
             <p className="text-sm text-gray-400 leading-relaxed">
@@ -64,27 +65,28 @@ export const AuthPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-[#12141f] border border-purple-900/30 text-xs space-y-2">
+          {/* Strict Account Issuance Policy Card */}
+          <div className="p-4 rounded-2xl bg-[#12141f]/90 border border-purple-900/40 text-xs space-y-2">
             <div className="flex items-center gap-2 text-purple-300 font-semibold">
               <ShieldCheck className="w-4 h-4 text-purple-400" />
               <span>Strict Account Issuance Policy</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
-              All employee profiles and login credentials (<code className="text-purple-300">LOI...</code>) are generated and provisioned by the HR Officer.
+              All employee profiles and login credentials (<code className="text-purple-300 font-mono">LOI...</code>) are generated and provisioned by the HR Officer.
             </p>
           </div>
         </div>
 
-        {/* Right Side: Login Form Card */}
+        {/* Right Side: Sign In Card */}
         <div className="lg:col-span-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="p-6 sm:p-8 rounded-3xl bg-[#11131c] border border-gray-800/90 shadow-2xl space-y-6"
+            className="p-6 sm:p-8 rounded-3xl bg-[#0f111a] border border-gray-800/90 shadow-2xl space-y-6"
           >
             <div>
-              <h2 className="text-xl font-bold text-white tracking-tight">Sign In to Dayflow</h2>
-              <p className="text-xs text-gray-400 mt-1">
+              <h2 className="text-2xl font-bold text-white tracking-tight">Sign In to Dayflow</h2>
+              <p className="text-xs text-gray-400 mt-1.5">
                 Enter your HR-issued Login ID or corporate email to proceed.
               </p>
             </div>
@@ -108,7 +110,7 @@ export const AuthPage: React.FC = () => {
                   value={loginIdOrEmail}
                   onChange={(e) => setLoginIdOrEmail(e.target.value)}
                   placeholder="e.g. LOIAASH20250001 or admin@dayflow.hr"
-                  className="w-full px-4 py-3 rounded-xl bg-[#090a0f] border border-gray-800 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/50 transition-all font-mono"
+                  className="w-full px-4 py-3 rounded-xl bg-[#07080d] border border-gray-800 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/50 transition-all font-mono"
                 />
               </div>
 
@@ -127,7 +129,7 @@ export const AuthPage: React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full px-4 py-3 pr-11 rounded-xl bg-[#090a0f] border border-gray-800 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/50 transition-all"
+                    className="w-full px-4 py-3 pr-11 rounded-xl bg-[#07080d] border border-gray-800 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-purple-500/60 focus:ring-1 focus:ring-purple-500/50 transition-all"
                   />
                   <button
                     type="button"
@@ -143,14 +145,14 @@ export const AuthPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-purple-600/25 disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all shadow-lg shadow-purple-600/30 disabled:opacity-50 mt-2"
               >
                 <span>{isLoading ? 'Authenticating...' : 'Sign In'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
 
-            <div className="pt-4 border-t border-gray-800 text-center">
+            <div className="pt-4 border-t border-gray-800/80 text-center">
               <p className="text-xs text-gray-500">
                 Need account access or forgot credentials? Contact your HR Officer (<span className="text-purple-400">admin@dayflow.hr</span>).
               </p>
