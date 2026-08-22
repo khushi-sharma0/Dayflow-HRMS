@@ -3,13 +3,13 @@ export type Role = 'HR_ADMIN' | 'EMPLOYEE';
 export type AttendanceStatus = 'present' | 'absent' | 'absent_no_leave' | 'on_leave';
 
 export interface SalaryConfig {
-  basicPercentage: number; // e.g., 50 (%)
-  hraPercentage: number; // e.g., 20 (%)
-  standardAllowance: number; // e.g., 800 ($ or ₹)
-  performanceBonusPercentage: number; // e.g., 10 (%)
-  ltaPercentage: number; // e.g., 5 (%)
-  professionalTax: number; // e.g., 200 ($)
-  pfPercentage: number; // e.g., 12 (%) of basic
+  basicPercentage: number;
+  hraPercentage: number;
+  standardAllowance: number;
+  performanceBonusPercentage: number;
+  ltaPercentage: number;
+  professionalTax: number;
+  pfPercentage: number;
 }
 
 export interface LeaveQuotas {
@@ -25,16 +25,16 @@ export interface EmergencyContact {
 }
 
 export interface StatutoryDetails {
-  pan: string; // Permanent Account Number e.g. "ABCDE1234F"
-  uan: string; // Universal Account Number e.g. "101234567890"
-  pfNumber?: string; // EPFO Member ID
-  esicNumber?: string; // ESIC Registration
+  pan: string;
+  uan: string;
+  pfNumber?: string;
+  esicNumber?: string;
 }
 
 export interface BankDetails {
   accountNumber: string;
   bankName: string;
-  routingOrIfsc: string; // IFSC Code for Indian banks (e.g. HDFC0001234)
+  routingOrIfsc: string;
   accountHolder: string;
 }
 
@@ -44,7 +44,7 @@ export interface Employee {
   firstName: string;
   lastName: string;
   name: string;
-  loginId: string; // e.g. LOIARSH20250001
+  loginId: string;
   email: string;
   phone: string;
   password: string;
@@ -57,7 +57,7 @@ export interface Employee {
   state?: string;
   city?: string;
   pinCode?: string;
-  joiningDate: string; // YYYY-MM-DD
+  joiningDate: string;
   joiningYear: number;
   serialNumber: number;
   status: AttendanceStatus;
@@ -82,9 +82,9 @@ export interface AttendanceRecord {
   employeeName: string;
   employeeLoginId: string;
   department: string;
-  date: string; // YYYY-MM-DD
-  checkIn: string | null; // e.g. "09:05 AM"
-  checkOut: string | null; // e.g. "05:45 PM"
+  date: string;
+  checkIn: string | null;
+  checkOut: string | null;
   workHours: number;
   extraHours: number;
   status: 'present' | 'absent' | 'on_leave';
@@ -102,8 +102,8 @@ export interface TimeOffRequest {
   employeeLoginId: string;
   department: string;
   type: TimeOffType;
-  startDate: string; // YYYY-MM-DD
-  endDate: string; // YYYY-MM-DD
+  startDate: string;
+  endDate: string;
   days: number;
   reason: string;
   attachmentName?: string;
@@ -122,22 +122,17 @@ export interface SalaryBreakdown {
   paidLeaveDays: number;
   unpaidLeaveDays: number;
   payableDays: number;
-  
   baseMonthlyWage: number;
-  proRatedWage: number; // based on payable days
-  
+  proRatedWage: number;
   basicSalary: number;
   hra: number;
   standardAllowance: number;
   performanceBonus: number;
   lta: number;
-  
   grossSalary: number;
-  
   professionalTax: number;
   pfDeduction: number;
   totalDeductions: number;
-  
   netSalary: number;
 }
 
@@ -148,8 +143,8 @@ export interface PayrollRecord {
   employeeLoginId: string;
   department: string;
   jobPosition: string;
-  month: string; // e.g. "August 2026"
-  monthKey: string; // "2026-08"
+  month: string;
+  monthKey: string;
   breakdown: SalaryBreakdown;
   status: 'Draft' | 'Approved' | 'Paid';
   paymentDate?: string;
@@ -157,7 +152,7 @@ export interface PayrollRecord {
 
 export interface AppNotification {
   id: string;
-  userId: string; // or 'ALL_HR'
+  userId: string;
   title: string;
   message: string;
   type: 'leave' | 'attendance' | 'salary' | 'security' | 'info';
