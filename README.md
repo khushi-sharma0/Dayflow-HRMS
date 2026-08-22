@@ -16,5 +16,5 @@ DayFlow is a Human Resource Management System designed to simplify and streamlin
 ## Contributors
 * Khushi Sharma
 * Chinmay Chavan
-* Blyth D'Souza
+* Blyth Dsouza
 * Bhargav Kanitkar
