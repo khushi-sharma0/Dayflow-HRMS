@@ -18,6 +18,7 @@ import { useAuth } from '../context/AuthContext';
 import { StorageService } from '../services/storage';
 import { CreateEmployeeModal } from '../components/CreateEmployeeModal';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { useTheme } from '../context/ThemeContext';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -35,6 +36,8 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const { currentUser, role, logout, allEmployees, refreshUserData } = useAuth();
+  const { isDark } = useTheme(); // <--- ADD THIS
 
   const notifications = currentUser
     ? StorageService.getNotifications(currentUser.id, role || 'EMPLOYEE')
@@ -64,13 +67,16 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-8">
             <button
-              onClick={() => onNavigate('dashboard')}
-              className="flex items-center gap-2.5 group text-left focus:outline-none"
-            >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-600/30 group-hover:scale-105 transition-transform">
-                <span className="text-base tracking-tight font-black">D</span>
-              </div>
-              <div>
+  onClick={() => onNavigate('dashboard')}
+  className="flex items-center gap-2.5 group text-left focus:outline-none"
+>
+  {/* Dynamic Light / Dark Logo */}
+  <img
+    src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
+    alt="Dayflow Logo"
+    className="w-9 h-9 object-contain group-hover:scale-105 transition-transform"
+  />
+  <div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-base font-bold text-white tracking-tight">Dayflow</span>
                   <span className="text-[10px] px-1.5 py-0.5 rounded font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">

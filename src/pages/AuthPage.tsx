@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { ThemeToggle } from '../components/ThemeToggle';
+import { useTheme } from '../context/ThemeContext';
 
 export const AuthPage: React.FC = () => {
   const { login, allEmployees } = useAuth();
@@ -20,6 +21,8 @@ export const AuthPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { isDark } = useTheme();
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,11 +54,14 @@ export const AuthPage: React.FC = () => {
       </div>
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div className="lg:col-span-6 space-y-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-500 flex items-center justify-center font-black text-white text-xl shadow-xl shadow-purple-600/30">
-              D
-            </div>
+        <div className="flex items-center gap-3">
+  {/* Dynamic Light / Dark Logo */}
+  <img
+    src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
+    alt="Dayflow Logo"
+    className="w-12 h-12 object-contain"
+  />
+  <div>
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-black text-white tracking-tight">Dayflow</h1>
