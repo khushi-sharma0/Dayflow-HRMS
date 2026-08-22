@@ -1,28 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import {
-  Lock,
-  User,
-  ShieldCheck,
-  ArrowRight,
-  AlertCircle,
-  Eye,
-  EyeOff,
-} from 'lucide-react';
+import { Lock, User, ShieldCheck, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { ThemeToggle } from '../components/ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export const AuthPage: React.FC = () => {
-  const { login, allEmployees } = useAuth();
+  const { login } = useAuth();
+  const { isDark } = useTheme();
 
   const [loginIdOrEmail, setLoginIdOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { isDark } = useTheme();
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,15 +29,6 @@ export const AuthPage: React.FC = () => {
     }, 250);
   };
 
-  const handleFillDemo = (loginId: string, pass: string) => {
-    setLoginIdOrEmail(loginId);
-    setPassword(pass);
-    setError('');
-  };
-
-  const hrAdmin = allEmployees.find((e) => e.role === 'HR_ADMIN');
-  const sampleEmployees = allEmployees.filter((e) => e.role === 'EMPLOYEE').slice(0, 4);
-
   return (
     <div className="min-h-screen bg-[#07080c] flex items-center justify-center p-4 sm:p-6 lg:p-8 font-['Plus_Jakarta_Sans',sans-serif] relative">
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
@@ -54,14 +36,15 @@ export const AuthPage: React.FC = () => {
       </div>
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div className="flex items-center gap-3">
-  {/* Dynamic Light / Dark Logo */}
-  <img
-    src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
-    alt="Dayflow Logo"
-    className="w-12 h-12 object-contain"
-  />
-  <div>
+        {/* Left Side: Brand & Policy Notice */}
+        <div className="lg:col-span-6 space-y-6">
+          <div className="flex items-center gap-3">
+            {/* Dynamic Light / Dark Logo */}
+            <img
+              src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
+              alt="Dayflow Logo"
+              className="w-12 h-12 object-contain"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-black text-white tracking-tight">Dayflow</h1>
@@ -88,63 +71,12 @@ export const AuthPage: React.FC = () => {
               <span>Strict Account Issuance Policy</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
-              Normal employees do not have a public registration option. All employee profiles and login credentials (<code className="text-purple-300">LOI...</code>) are generated and provisioned by the HR Officer.
+              All employee profiles and login credentials (<code className="text-purple-300">LOI...</code>) are generated and provisioned by the HR Officer.
             </p>
-          </div>
-
-          <div className="space-y-2.5 pt-2">
-            <div className="flex items-center justify-between text-xs font-semibold text-gray-400">
-              <span>PRE-CONFIGURED TEST ACCOUNTS</span>
-              <span className="text-[10px] text-purple-400">Click to autofill</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {hrAdmin && (
-                <button
-                  type="button"
-                  onClick={() => handleFillDemo(hrAdmin.loginId, hrAdmin.password)}
-                  className="p-3 rounded-xl bg-purple-950/20 hover:bg-purple-900/30 border border-purple-800/40 text-left transition-all group flex items-center gap-3"
-                >
-                  <img
-                    src={hrAdmin.avatarUrl}
-                    alt={hrAdmin.name}
-                    className="w-9 h-9 rounded-lg object-cover ring-1 ring-purple-500/40"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <div className="text-xs font-semibold text-white group-hover:text-purple-300 truncate">
-                      {hrAdmin.name}
-                    </div>
-                    <div className="text-[10px] text-purple-400 font-mono">HR Officer (Admin)</div>
-                  </div>
-                </button>
-              )}
-
-              {sampleEmployees.map((emp) => (
-                <button
-                  key={emp.id}
-                  type="button"
-                  onClick={() => handleFillDemo(emp.loginId, emp.password)}
-                  className="p-3 rounded-xl bg-[#12141f] hover:bg-[#181b2a] border border-gray-800 text-left transition-all group flex items-center gap-3"
-                >
-                  <img
-                    src={emp.avatarUrl}
-                    alt={emp.name}
-                    className="w-9 h-9 rounded-lg object-cover ring-1 ring-gray-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <div className="text-xs font-semibold text-gray-200 group-hover:text-white truncate">
-                      {emp.name}
-                    </div>
-                    <div className="text-[10px] text-gray-400 truncate">{emp.jobPosition}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
+        {/* Right Side: Login Form Card */}
         <div className="lg:col-span-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

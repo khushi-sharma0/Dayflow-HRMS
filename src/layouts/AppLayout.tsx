@@ -15,10 +15,10 @@ import {
   Plus,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { StorageService } from '../services/storage';
 import { CreateEmployeeModal } from '../components/CreateEmployeeModal';
 import { ThemeToggle } from '../components/ThemeToggle';
-import { useTheme } from '../context/ThemeContext';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -32,12 +32,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
   onNavigate,
 }) => {
   const { currentUser, role, logout, refreshUserData } = useAuth();
-  
+  const { isDark } = useTheme();
+
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const { currentUser, role, logout, allEmployees, refreshUserData } = useAuth();
-  const { isDark } = useTheme(); // <--- ADD THIS
 
   const notifications = currentUser
     ? StorageService.getNotifications(currentUser.id, role || 'EMPLOYEE')
@@ -63,20 +62,22 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
 
   return (
     <div className="min-h-screen bg-[#090a0f] text-gray-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif]">
+      {/* Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-[#0d0f17]/90 backdrop-blur-md border-b border-gray-800/80 px-4 lg:px-8 py-3">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          {/* Brand Logo & Title */}
           <div className="flex items-center gap-8">
             <button
-  onClick={() => onNavigate('dashboard')}
-  className="flex items-center gap-2.5 group text-left focus:outline-none"
->
-  {/* Dynamic Light / Dark Logo */}
-  <img
-    src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
-    alt="Dayflow Logo"
-    className="w-9 h-9 object-contain group-hover:scale-105 transition-transform"
-  />
-  <div>
+              onClick={() => onNavigate('dashboard')}
+              className="flex items-center gap-2.5 group text-left focus:outline-none"
+            >
+              {/* Dynamic Light / Dark Logo */}
+              <img
+                src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
+                alt="Dayflow Logo"
+                className="w-9 h-9 object-contain group-hover:scale-105 transition-transform"
+              />
+              <div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-base font-bold text-white tracking-tight">Dayflow</span>
                   <span className="text-[10px] px-1.5 py-0.5 rounded font-mono font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
@@ -87,6 +88,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
               </div>
             </button>
 
+            {/* Desktop Navigation Links */}
             <nav className="hidden md:flex items-center gap-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -109,6 +111,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
             </nav>
           </div>
 
+          {/* Right Utilities */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             {role === 'HR_ADMIN' && (
               <button
@@ -125,13 +128,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
               <span className="font-mono text-[11px] text-gray-300">
                 {role === 'HR_ADMIN' ? 'HR Officer' : 'Staff'}
               </span>
-              <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold uppercase">
-                Auth Verified
-              </span>
             </div>
 
             <ThemeToggle />
 
+            {/* Notifications Button */}
             <div className="relative">
               <button
                 onClick={() => {
@@ -215,6 +216,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
               </AnimatePresence>
             </div>
 
+            {/* User Profile Avatar Dropdown */}
             {currentUser && (
               <div className="relative">
                 <button
@@ -252,14 +254,6 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
                       <div className="p-3 border-b border-gray-800">
                         <div className="font-semibold text-sm text-white">{currentUser.name}</div>
                         <div className="text-xs text-gray-400 truncate">{currentUser.email}</div>
-                        <div className="mt-1.5 flex items-center gap-1.5">
-                          <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                            {currentUser.loginId}
-                          </span>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-gray-800 text-gray-300">
-                            {role === 'HR_ADMIN' ? 'HR Officer' : 'Staff Member'}
-                          </span>
-                        </div>
                       </div>
 
                       <div className="py-1.5 space-y-0.5">
@@ -305,25 +299,6 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
             )}
           </div>
         </div>
-
-        <div className="flex md:hidden items-center justify-around pt-3 mt-3 border-t border-gray-800/60">
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => onNavigate(item.id as any)}
-                className={`flex flex-col items-center gap-1 text-[11px] font-medium py-1 px-2 rounded-lg transition-colors ${
-                  isActive ? 'text-purple-400' : 'text-gray-400'
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
-        </div>
       </header>
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
@@ -332,9 +307,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
 
       <footer className="border-t border-gray-900 bg-[#07080c] py-4 px-4 text-center text-xs text-gray-600">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div>
-            Dayflow HRMS • Enterprise Corporate Infrastructure
-          </div>
+          <div>Dayflow HRMS • Enterprise Infrastructure</div>
           <div className="flex items-center gap-4 text-gray-500">
             <span>Formula-Compliant LOI ID Generation</span>
             <span>•</span>
@@ -354,9 +327,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
       <CreateEmployeeModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        onEmployeeCreated={() => {
-          onNavigate('employees');
-        }}
+        onEmployeeCreated={() => onNavigate('employees')}
       />
     </div>
   );
