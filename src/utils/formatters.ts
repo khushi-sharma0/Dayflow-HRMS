@@ -1,8 +1,3 @@
-// Indian localization utilities
-
-/**
- * Format an amount into Indian Rupee format (e.g., ₹1,25,000 or ₹45,000)
- */
 export function formatINR(amount: number): string {
   if (isNaN(amount) || amount === null || amount === undefined) {
     return '₹0';
@@ -11,7 +6,6 @@ export function formatINR(amount: number): string {
   const isNegative = amount < 0;
   const absAmount = Math.round(Math.abs(amount));
   
-  // Use Indian numbering formatting
   const formattedNumber = new Intl.NumberFormat('en-IN', {
     maximumFractionDigits: 0,
   }).format(absAmount);
@@ -19,9 +13,6 @@ export function formatINR(amount: number): string {
   return `${isNegative ? '-' : ''}₹${formattedNumber}`;
 }
 
-/**
- * Format a date string (YYYY-MM-DD) to Indian format (DD/MM/YYYY or DD Mon YYYY)
- */
 export function formatIndianDate(dateString: string, style: 'numeric' | 'short' | 'long' = 'short'): string {
   if (!dateString) return '-';
   try {
@@ -43,7 +34,6 @@ export function formatIndianDate(dateString: string, style: 'numeric' | 'short' 
       });
     }
 
-    // Default short format e.g. "15 Jan 2025"
     return d.toLocaleDateString('en-IN', {
       day: '2-digit',
       month: 'short',
@@ -54,9 +44,6 @@ export function formatIndianDate(dateString: string, style: 'numeric' | 'short' 
   }
 }
 
-/**
- * Format time in IST format (e.g. 09:30 AM IST)
- */
 export function formatISTTime(date: Date = new Date()): string {
   return (
     date.toLocaleTimeString('en-IN', {
@@ -68,60 +55,3 @@ export function formatISTTime(date: Date = new Date()): string {
     }) + ' IST'
   );
 }
-
-/**
- * Common Indian States and Union Territories
- */
-export const INDIAN_STATES_AND_UT = [
-  'Andhra Pradesh',
-  'Arunachal Pradesh',
-  'Assam',
-  'Bihar',
-  'Chhattisgarh',
-  'Goa',
-  'Gujarat',
-  'Haryana',
-  'Himachal Pradesh',
-  'Jharkhand',
-  'Karnataka',
-  'Kerala',
-  'Madhya Pradesh',
-  'Maharashtra',
-  'Manipur',
-  'Meghalaya',
-  'Mizoram',
-  'Nagaland',
-  'Odisha',
-  'Punjab',
-  'Rajasthan',
-  'Sikkim',
-  'Tamil Nadu',
-  'Telangana',
-  'Tripura',
-  'Uttar Pradesh',
-  'Uttarakhand',
-  'West Bengal',
-  'Delhi (NCT)',
-  'Chandigarh',
-  'Jammu & Kashmir',
-  'Ladakh',
-  'Puducherry',
-];
-
-/**
- * Prominent Indian Tech & Business Locations
- */
-export const INDIAN_OFFICE_LOCATIONS = [
-  'Bengaluru, Karnataka',
-  'Hyderabad, Telangana',
-  'Mumbai, Maharashtra',
-  'Pune, Maharashtra',
-  'Gurugram, Haryana',
-  'Noida, Uttar Pradesh',
-  'Chennai, Tamil Nadu',
-  'Ahmedabad, Gujarat',
-  'Kochi, Kerala',
-  'Kolkata, West Bengal',
-  'Jaipur, Rajasthan',
-  'Chandigarh',
-];
