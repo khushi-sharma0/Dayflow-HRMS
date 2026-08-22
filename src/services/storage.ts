@@ -691,7 +691,7 @@ export class StorageService {
       localStorage.setItem(STORAGE_KEYS.ATTENDANCE, JSON.stringify(generateSeedAttendance()));
       localStorage.setItem(STORAGE_KEYS.TIMEOFF, JSON.stringify(INITIAL_TIMEOFF_REQUESTS));
       localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(INITIAL_NOTIFICATIONS));
-      // Leave active user ID unset so users land directly on the Login page
+      // Unset active user so users land directly on Login page
       localStorage.setItem(STORAGE_KEYS.INITIALIZED, 'true');
     }
   }
@@ -1233,4 +1233,3 @@ export class StorageService {
     }
   }
 }
-

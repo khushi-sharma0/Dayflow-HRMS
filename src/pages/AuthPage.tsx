@@ -39,7 +39,6 @@ export const AuthPage: React.FC = () => {
         {/* Left Side: Brand & Policy Notice */}
         <div className="lg:col-span-6 space-y-6">
           <div className="flex items-center gap-3">
-            {/* Dynamic Light / Dark Logo */}
             <img
               src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
               alt="Dayflow Logo"

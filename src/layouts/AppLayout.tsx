@@ -71,7 +71,6 @@ export const AppLayout: React.FC<AppLayoutProps> = ({
               onClick={() => onNavigate('dashboard')}
               className="flex items-center gap-2.5 group text-left focus:outline-none"
             >
-              {/* Dynamic Light / Dark Logo */}
               <img
                 src={isDark ? '/Logo-dark.png' : '/Logo-light.png'}
                 alt="Dayflow Logo"
