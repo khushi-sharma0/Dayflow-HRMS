@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
 import {
   Clock,
   Calendar,
-  CheckCircle2,
-  AlertCircle,
   LogIn,
   LogOut,
   TrendingUp,
-  Award,
-  Sparkles,
-  ChevronRight,
-  ShieldCheck,
-  Building2,
-  FileText,
   Plus,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StorageService } from '../services/storage';
 import { ApplyLeaveModal } from '../components/ApplyLeaveModal';
-import { PaySlipModal } from '../components/PaySlipModal';
-import { AttendanceRecord } from '../types';
 import { formatIndianDate } from '../utils/formatters';
 
 interface EmployeeDashboardProps {
@@ -31,10 +20,8 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
   const { currentUser, refreshUserData } = useAuth();
   
   const [isApplyLeaveOpen, setIsApplyLeaveOpen] = useState(false);
-  const [isPaySlipOpen, setIsPaySlipOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Clock ticker for live clock display
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -47,14 +34,9 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
   const timeOffRequests = StorageService.getEmployeeTimeOffRequests(currentUser.id);
   const isCheckedIn = currentUser.status === 'present' && !!todayRecord?.checkIn && !todayRecord?.checkOut;
 
-  // Monthly stats
   const currentMonthYear = new Date().getFullYear();
   const currentMonthIdx = new Date().getMonth();
   const salaryBreakdown = StorageService.calculateSalaryBreakdown(currentUser, currentMonthYear, currentMonthIdx);
-
-  const totalWorkedDaysThisMonth = attendanceHistory.filter(
-    (r) => r.status === 'present' && new Date(r.date).getMonth() === currentMonthIdx
-  ).length;
 
   const handleCheckIn = () => {
     try {
@@ -76,7 +58,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
 
   return (
     <div className="space-y-6">
-      {/* Top Banner with Employee Identity & Live Time */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#141624] via-[#121420] to-[#0f111a] border border-gray-800">
         <div className="flex items-center gap-4">
           <img
@@ -99,7 +80,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
           </div>
         </div>
 
-        {/* Live Clock Card */}
         <div className="flex items-center gap-4 bg-[#0b0c12]/80 border border-gray-800 px-4 py-3 rounded-xl self-start md:self-auto">
           <div className="text-right">
             <div className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold">Indian Standard Time (IST)</div>
@@ -113,11 +93,8 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
         </div>
       </div>
 
-      {/* Main Grid: Check In/Out Card & Leave Balance Cards */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Attendance Punch Card & Stats */}
         <div className="lg:col-span-6 space-y-6">
-          {/* Daily Attendance Punch Card */}
           <div className="p-6 rounded-2xl bg-[#12141f] border border-gray-800 space-y-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -127,7 +104,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
                 </h2>
               </div>
 
-              {/* Status Indicator */}
               <div className="flex items-center gap-2">
                 <span className="text-xs text-gray-400">Status:</span>
                 {currentUser.status === 'present' ? (
@@ -149,7 +125,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
               </div>
             </div>
 
-            {/* Check In / Out Visual Details */}
             <div className="grid grid-cols-2 gap-4 p-4 rounded-xl bg-[#0b0c10] border border-gray-800/80">
               <div>
                 <span className="text-xs text-gray-500 block mb-1">Today's Check In (IST)</span>
@@ -166,7 +141,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
               </div>
             </div>
 
-            {/* Punch Action Buttons */}
             <div className="flex gap-3">
               {!isCheckedIn ? (
                 <button
@@ -192,7 +166,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
             </p>
           </div>
 
-          {/* Monthly Attendance Progress */}
           <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -234,9 +207,7 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
           </div>
         </div>
 
-        {/* Right Column: Leave Quotas & Recent Activity */}
         <div className="lg:col-span-6 space-y-6">
-          {/* Leave Quotas & Apply Button */}
           <div className="p-6 rounded-2xl bg-[#12141f] border border-gray-800 space-y-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -255,7 +226,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {/* Paid Time Off */}
               <div className="p-4 rounded-xl bg-[#0b0c10] border border-gray-800 space-y-2">
                 <span className="text-[11px] text-gray-400 font-medium">Paid Time Off (PTO)</span>
                 <div className="flex items-baseline gap-1">
@@ -274,7 +244,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
                 </div>
               </div>
 
-              {/* Sick Time Off */}
               <div className="p-4 rounded-xl bg-[#0b0c10] border border-gray-800 space-y-2">
                 <span className="text-[11px] text-gray-400 font-medium">Sick Time Off</span>
                 <div className="flex items-baseline gap-1">
@@ -293,7 +262,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
                 </div>
               </div>
 
-              {/* Unpaid Leave */}
               <div className="p-4 rounded-xl bg-[#0b0c10] border border-gray-800 space-y-2">
                 <span className="text-[11px] text-gray-400 font-medium">Unpaid Leave</span>
                 <div className="flex items-baseline gap-1">
@@ -307,7 +275,6 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
             </div>
           </div>
 
-          {/* Recent Time-Off Requests */}
           <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800 space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold text-white uppercase tracking-wider">
@@ -371,4 +338,3 @@ export const EmployeeDashboard: React.FC<EmployeeDashboardProps> = ({ onNavigate
     </div>
   );
 };
-

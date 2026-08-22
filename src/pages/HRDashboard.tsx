@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
 import {
   Users,
   UserCheck,
   UserX,
   Calendar,
-  Clock,
   UserPlus,
-  ArrowUpRight,
   CheckCircle2,
-  XCircle,
-  AlertTriangle,
   ChevronRight,
-  TrendingUp,
-  ShieldCheck,
-  Sparkles,
-  IndianRupee,
   Building2,
+  ArrowUpRight,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { StorageService } from '../services/storage';
 import { CreateEmployeeModal } from '../components/CreateEmployeeModal';
-import { Employee, TimeOffRequest } from '../types';
 import { formatINR, formatIndianDate } from '../utils/formatters';
 
 interface HRDashboardProps {
@@ -37,13 +28,10 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
 
   const presentEmployees = employees.filter((e) => e.status === 'present');
   const absentEmployees = employees.filter((e) => e.status === 'absent' || e.status === 'absent_no_leave');
-  const onLeaveEmployees = employees.filter((e) => e.status === 'on_leave');
 
-  const attendanceRecords = StorageService.getAttendanceRecords();
   const timeOffRequests = StorageService.getTimeOffRequests();
   const pendingRequests = timeOffRequests.filter((r) => r.status === 'Pending');
 
-  // Compute total monthly payroll estimate
   const currentMonthYear = new Date().getFullYear();
   const currentMonthIdx = new Date().getMonth();
   const totalEstimatedPayroll = employees.reduce((sum, emp) => {
@@ -67,7 +55,6 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-6">
-      {/* Top Banner / Welcome */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-[#141624] via-[#121420] to-[#0f111a] border border-gray-800">
         <div>
           <div className="flex items-center gap-2">
@@ -95,9 +82,7 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Primary KPI Metrics Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Total Headcount */}
         <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800/90 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-gray-400">Total Workforce</span>
@@ -111,7 +96,6 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Present Today */}
         <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800/90 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-gray-400">Present Today</span>
@@ -127,7 +111,6 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Absent / Unexcused */}
         <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800/90 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-gray-400">Absent / No Leave</span>
@@ -141,7 +124,6 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Pending Time Off */}
         <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800/90 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-medium text-gray-400">Pending Leaves</span>
@@ -156,9 +138,7 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Mid Section: Active Status Overview & Pending Leave Queue */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Workforce Presence Cards */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -234,9 +214,7 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Right: Leave Requests Queue & Payroll Summary */}
         <div className="lg:col-span-5 space-y-6">
-          {/* Pending Leaves Queue */}
           <div className="p-5 rounded-2xl bg-[#12141f] border border-gray-800 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -302,7 +280,6 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
             )}
           </div>
 
-          {/* Payroll & Payable Days Summary Card */}
           <div className="p-5 rounded-2xl bg-gradient-to-br from-[#151326] to-[#0f111c] border border-purple-900/40 space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -349,4 +326,3 @@ export const HRDashboard: React.FC<HRDashboardProps> = ({ onNavigate }) => {
     </div>
   );
 };
-

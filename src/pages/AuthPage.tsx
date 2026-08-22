@@ -4,12 +4,8 @@ import {
   Lock,
   User,
   ShieldCheck,
-  Building2,
-  Sparkles,
   ArrowRight,
   AlertCircle,
-  KeyRound,
-  Users,
   Eye,
   EyeOff,
 } from 'lucide-react';
@@ -50,13 +46,11 @@ export const AuthPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07080c] flex items-center justify-center p-4 sm:p-6 lg:p-8 font-['Plus_Jakarta_Sans',sans-serif] relative">
-      {/* Top Corner Day/Night Theme Toggle */}
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
         <ThemeToggle showLabel />
       </div>
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        {/* Left Side: Brand & Policy Notice */}
         <div className="lg:col-span-6 space-y-6">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-purple-500 to-indigo-500 flex items-center justify-center font-black text-white text-xl shadow-xl shadow-purple-600/30">
@@ -82,7 +76,6 @@ export const AuthPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Access Policy Card */}
           <div className="p-4 rounded-2xl bg-[#12141f] border border-purple-900/30 text-xs space-y-2">
             <div className="flex items-center gap-2 text-purple-300 font-semibold">
               <ShieldCheck className="w-4 h-4 text-purple-400" />
@@ -93,7 +86,6 @@ export const AuthPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Quick Demo Credentials Autofill for Evaluation */}
           <div className="space-y-2.5 pt-2">
             <div className="flex items-center justify-between text-xs font-semibold text-gray-400">
               <span>PRE-CONFIGURED TEST ACCOUNTS</span>
@@ -101,7 +93,6 @@ export const AuthPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {/* HR Admin Card */}
               {hrAdmin && (
                 <button
                   type="button"
@@ -123,7 +114,6 @@ export const AuthPage: React.FC = () => {
                 </button>
               )}
 
-              {/* Sample Employees */}
               {sampleEmployees.map((emp) => (
                 <button
                   key={emp.id}
@@ -149,7 +139,6 @@ export const AuthPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side: Login Form Card */}
         <div className="lg:col-span-6">
           <motion.div
             initial={{ opacity: 0, y: 15 }}

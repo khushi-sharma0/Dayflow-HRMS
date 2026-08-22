@@ -10,7 +10,6 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
 const THEME_STORAGE_KEY = 'dayflow_theme';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -21,16 +20,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return savedTheme;
       }
     } catch {
-      // Ignore local storage error
+      // Local storage fallback
     }
-    return 'dark'; // Default theme is dark as requested
+    return 'dark';
   });
 
   useEffect(() => {
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
     } catch {
-      // Ignore local storage error
+      // Local storage fallback
     }
 
     const root = document.documentElement;
