@@ -1,5 +1,5 @@
 # DayFlow
-![Logo.png](system-architecture.png)
+![Logo](Logo.png)
 
 
 ## Project Overview
