@@ -1,0 +1,8 @@
+{
+  "name": "Remix Dayflow – Human Resource Management System",
+  "description": "A modern, professional HRMS featuring Day/Night theme toggle, role-based access for HR officers and employees, automated employee onboarding & ID generation, real-time check-in attendance, dynamic salary & payable day calculations, and time-off workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
